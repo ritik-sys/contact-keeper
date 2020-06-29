@@ -1,18 +1,11 @@
-const mongoose = require("mongoose")
-const config = require('config')
-const db = config.get('mongoURI')
 
-const connectDB = async () => {
-    try {
-        await mongoose.connect(db, {
-            useNewUrlParser: true,
-            useUnifiedTopology: true
-        });
-        console.log('mongo DB connected');
-    } catch (err) {
-        console.log(err);
-        process.exit(1);
-    }
-};
+const moongoose = require('mongoose')
+const uri = "mongodb+srv://admin-ritik:test123@cluster0-t4jbz.mongodb.net/contactKeeper?retryWrites=true&w=majority";
 
-module.exports = connectDB
+
+const connectDB = () => {
+    moongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
+        .then(() => console.log('mongo connected'))
+        .catch(err => { console.log(err); })
+}
+module.exports = connectDB;
